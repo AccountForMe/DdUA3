@@ -118,8 +118,8 @@ function drawDots() {
         ctx.fill();
 
         // Draw the number next to the dot
-        ctx.font = '12px Arial';
-        ctx.fillStyle = 'black'; // Set the color to black
+        ctx.font = '16px Arial';
+        ctx.fillStyle = 'white'; // Set the color to black
         ctx.fillText(index + 1, dot.x + 8, dot.y - 8);
     });
 }
@@ -136,3 +136,19 @@ document.getElementById('download-btn').addEventListener('click', () => {
     a.download = 'canvas.png';
     a.click();
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Your code here
+    function changeTexture() {
+      var modelEntity = document.getElementById('model');
+      var materialComponent = modelEntity.querySelector('[material]');
+      if (materialComponent) {
+        materialComponent.setAttribute('material', 'src', 'texturerock.png');
+      } else {
+        console.error('Material component not found');
+      }
+    }
+  });
+  
+  

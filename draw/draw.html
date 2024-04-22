@@ -5,11 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas Drawing</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 </head>
 <body>
     <canvas id="canvas" width="300" height="300"></canvas>
     <button id="download-btn">Download</button>
     <button id="clear-btn">Clear</button>
+    <button onclick="applyShader()">texture</button>
     <script src="script.js"></script>
+    <div id="parametre">
+        <a-scene embedded background="color: #F2E8C6">
+            <a-assets>
+                <img id="texture" src="a596a01c826cf4ea556821c5eeb26729.png">
+                <a-asset-item id="cube" src="cube.glb"></a-asset-item>
+              </a-assets>
+      
+          <a-box position="-2 1 -3" color="#FFD700" scale="3 3 3"></a-box>
+          <a-plane position="0 -1 0" rotation="-90 0 0" width="400" height="400" color="#7BC8A4"></a-plane>
+          <a-entity id="model" gltf-model="#cube" shader="src: #texture-overlay; color: #ffffff; texture: url(path/to/your/texture.png)"></a-entity>
+
+      
+        </a-scene>
+      </div>
 </body>
 </html>

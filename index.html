@@ -19,6 +19,7 @@
         <div class="container">
             <h1 id="message">Regarde sur le HIRO</h1>
             <button onclick="draw()">draw</button>
+            <button onclick="changeTexture()">texture</button>
             <canvas id="canvas" width="300" height="300"></canvas>
             <button id="download-btn">Download</button>
             <button id="clear-btn">Clear</button>
@@ -50,10 +51,10 @@
             <a-asset-item id="cake" src="5portal_cake.glb"></a-asset-item>
 
         </a-assets>
-        <!-- <a-entity position='0 0 0' gltf-model="#cube" scale="1 1 1"></a-entity> -->
-        <a-entity class="cakeprtl" position='0 0 0' gltf-model="#cake" scale="1 1 1"></a-entity>
+        <a-entity id="model" position='0 0 0' gltf-model="#cube" scale="1 1 1"></a-entity>
+        <!-- <a-entity class="cakeprtl" position='0 0 0' gltf-model="#cake" scale="1 1 1"></a-entity> -->
         <!-- <a-box position='0 0 0'></a-box> -->
-        <a-marker-camera preset='hiro'></a-marker-camera>
+        <!-- <a-marker-camera preset='hiro'></a-marker-camera> -->
     </a-scene>
     <script src="script.js"></script>
 </body>

@@ -7,4 +7,13 @@ body {
 }
 canvas {
     border: 1px solid black;
+    background-color: black;
 }
+
+#parametre{
+    width: 30%;
+    height: 600px;
+    margin: right;
+    border: 3px solid #EFDFAA;
+    padding: 10px;
+  }
