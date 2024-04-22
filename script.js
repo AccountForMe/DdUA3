@@ -133,12 +133,13 @@ function drawDots() {
     dots.forEach((dot, index) => {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, 5, 0, Math.PI * 2);
-        ctx.fillStyle = 'black'; // Set the color to black
+        ctx.fillStyle = 'white'; // Set the color to black
         ctx.fill();
+        
 
         // Draw the number next to the dot
         ctx.font = '12px Arial';
-        ctx.fillStyle = 'black'; // Set the color to black
+        ctx.fillStyle = 'white'; // Set the color to black
         ctx.fillText(index + 1, dot.x + 8, dot.y - 8);
     });
 }
