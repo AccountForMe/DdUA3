@@ -54,25 +54,27 @@ const ctx = canvas.getContext('2d');
 
 let isDrawing = false;
 
-canvas.addEventListener('mousedown', (e) => {
+canvas.addEventListener('touchstart', (e) => {
     isDrawing = true;
-    draw(e);
+    draw(e.touches[0]); // Use the first touch
 });
 
-canvas.addEventListener('mousemove', (e) => {
+canvas.addEventListener('touchmove', (e) => {
     if (isDrawing) {
-        draw(e);
+        e.preventDefault(); // Prevent scrolling on touchmove
+        draw(e.touches[0]); // Use the first touch
     }
 });
 
-canvas.addEventListener('mouseup', () => {
+canvas.addEventListener('touchend', () => {
     isDrawing = false;
 });
 
 function draw(e) {
     ctx.fillStyle = 'red';
-    ctx.fillRect(e.offsetX, e.offsetY, 5, 5);
+    ctx.fillRect(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 5, 5);
 }
+
 
 document.getElementById('download-btn').addEventListener('click', () => {
     const dataUrl = canvas.toDataURL('image/png');
