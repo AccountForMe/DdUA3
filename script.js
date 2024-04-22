@@ -53,16 +53,35 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+
+canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
+canvas.addEventListener('mousemove', (e) => {
+    if (isDrawing) {
+        draw(e.offsetX, e.offsetY);
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+});
+
+canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+});
 
 canvas.addEventListener('touchstart', (e) => {
     isDrawing = true;
-    draw(e.touches[0]); // Use the first touch
+    [lastX, lastY] = [e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop];
 });
 
 canvas.addEventListener('touchmove', (e) => {
     if (isDrawing) {
-        e.preventDefault(); // Prevent scrolling on touchmove
-        draw(e.touches[0]); // Use the first touch
+        e.preventDefault();
+        draw(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
+        [lastX, lastY] = [e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop];
     }
 });
 
@@ -70,10 +89,19 @@ canvas.addEventListener('touchend', () => {
     isDrawing = false;
 });
 
-function draw(e) {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 5, 5);
+function draw(x, y) {
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 5;
+    ctx.stroke();
 }
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
 
 
 document.getElementById('download-btn').addEventListener('click', () => {
