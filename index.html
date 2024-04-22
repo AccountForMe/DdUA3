@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Égnime</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- include A-Frame obviously -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <!-- include ar.js for A-Frame -->
+    <!-- <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script> -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+</head>
+
+<body>
+    <button class="menu-button startanimation" onclick="toggleMenu()">Open Menu</button>
+    <div class="menu-container closed">
+        <div class="container">
+            <h1 id="message">Regarde sur le HIRO</h1>
+            <button onclick="draw()">draw</button>
+            <canvas id="canvas" width="300" height="300"></canvas>
+            <button id="download-btn">Download</button>
+            <button id="clear-btn">Clear</button>
+            <div class="combination">
+                <button onclick="changeDigit(1, 0)">▲</button>
+                <button onclick="changeDigit(1, 1)">▲</button>
+                <button onclick="changeDigit(1, 2)">▲</button>
+                
+                
+            </div>
+            <div class="combination">
+                
+                <span id="digit1">0</span>
+                <span id="digit2">0</span>
+                <span id="digit3">0</span>
+                
+            </div>
+            <div class="combination">
+                <button onclick="changeDigit(-1, 0)">▼</button>
+                <button onclick="changeDigit(-1, 1)">▼</button>
+                <button onclick="changeDigit(-1, 2)">▼</button>
+            </div>
+            <button onclick="checkCombination()">Submit</button>
+        </div>
+    </div>
+    <a-scene arjs>
+        <a-assets>
+            <a-asset-item id="cube" src="cube.glb"></a-asset-item>
+            <a-asset-item id="cake" src="5portal_cake.glb"></a-asset-item>
+
+        </a-assets>
+        <!-- <a-entity position='0 0 0' gltf-model="#cube" scale="1 1 1"></a-entity> -->
+        <a-entity class="cakeprtl" position='0 0 0' gltf-model="#cake" scale="1 1 1"></a-entity>
+        <!-- <a-box position='0 0 0'></a-box> -->
+        <a-marker-camera preset='hiro'></a-marker-camera>
+    </a-scene>
+    <script src="script.js"></script>
+</body>
+</html>

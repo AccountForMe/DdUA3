@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#message {
+    padding-top: 30%; /* Adjust the padding as needed */
+    color: white;
+}
+
+.menu-container {
+    position: fixed;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fbeea118-dd45-403b-ab53-ef04c79502ed/d8o6p3j-a7cfb6e6-e69d-4fe8-a957-eb156f719b61.png/v1/fill/w_894,h_894,q_70,strp/seamless_cobblestone_texture_by_bcmartini77_d8o6p3j-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNCIsInBhdGgiOiJcL2ZcL2ZiZWVhMTE4LWRkNDUtNDAzYi1hYjUzLWVmMDRjNzk1MDJlZFwvZDhvNnAzai1hN2NmYjZlNi1lNjlkLTRmZTgtYTk1Ny1lYjE1NmY3MTliNjEucG5nIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.uzDMYoCQfOY6gU9FfWIH3BYdRNf2k79UfjcSnk-SKis'); /* Replace 'path_to_your_image.jpg' with the actual path to your image */
+    background-size: auto 10%; /* Scale width automatically and repeat vertically */
+    background-repeat: repeat; /* Repeat texture */
+    transition: right 0.3s;
+    z-index: 1;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.open{
+    right: 0px;
+}
+
+.closed{
+    right:-300px;
+}
+
+.menu-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 20px 30px;
+    background-color: #333;
+    color: white;
+    border: 10px solid transparent; /* Initial transparent border */
+    cursor: pointer;
+    z-index: 2;
+}
+
+.startanimation {
+    animation: rainbow 3s linear infinite; /* Start animation after 3 seconds */
+    animation-delay: 3s; /* Delay the start of animation by 3 seconds */
+}
+
+
+
+@keyframes rainbow {
+    0% {
+        border-color: red;
+    }
+    16.666% {
+        border-color: orange;
+    }
+    33.333% {
+        border-color: yellow;
+    }
+    50% {
+        border-color: green;
+    }
+    66.666% {
+        border-color: blue;
+    }
+    83.333% {
+        border-color: indigo;
+    }
+    100% {
+        border-color: violet;
+    }
+}
+
+canvas,
+video {
+    display: block;
+    width: 100% !important;
+    height: 100% !important; 
+    margin: 0 !important;
+    object-fit: contain !important; 
+} 
+
+.combination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.combination button,
+.combination span {
+    flex: 1;
+    text-align: center;
+}
+
+.combination button {
+    background-color: #c9c9c9;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 10px;
+    margin: 0 5px; /* Adjust as needed */
+    cursor: pointer;
+}
+
+.combination span {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0 5px; /* Adjust as needed */
+}
+
+.hidden {
+    visibility: show;
+}
+
+.cakeprtl{
+    visibility: hidden;
+}
+
+
+canvas {
+    border: 1px solid rgb(255, 255, 255);
+}
