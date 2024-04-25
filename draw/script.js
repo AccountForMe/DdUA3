@@ -59,8 +59,15 @@ function clearCanvas() {
     drawDots(); // Redraw the dots after clearing
 }
 
+function startDrawing(x, y) {
+    isDrawing = true;
+    lastX = x;
+    lastY = y;
+}
+
+
 function draw(x, y) {
-    console.log('x:', x, 'y:', y); // Print the coordinates
+    if (!isDrawing) return;
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
@@ -72,36 +79,30 @@ function draw(x, y) {
     lastY = y;
 }
 
+function stopDrawing() {
+    isDrawing = false;
+}
+
 canvas.addEventListener('mousedown', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY];
+    startDrawing(e.offsetX, e.offsetY);
 });
 
 canvas.addEventListener('mousemove', (e) => {
-    if (isDrawing) {
-        draw(e.offsetX, e.offsetY);
-    }
+    draw(e.offsetX, e.offsetY);
 });
 
-canvas.addEventListener('mouseup', () => {
-    isDrawing = false;
-});
+canvas.addEventListener('mouseup', stopDrawing);
 
 canvas.addEventListener('touchstart', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop];
+    startDrawing(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
 });
 
 canvas.addEventListener('touchmove', (e) => {
-    if (isDrawing) {
-        e.preventDefault();
-        draw(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
-    }
+    e.preventDefault();
+    draw(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
 });
 
-canvas.addEventListener('touchend', () => {
-    isDrawing = false;
-});
+canvas.addEventListener('touchend', stopDrawing);
 
 // Define the positions of the 7 dots
 const dots = [
