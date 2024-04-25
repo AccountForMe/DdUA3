@@ -94,12 +94,14 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener('mouseup', stopDrawing);
 
 canvas.addEventListener('touchstart', (e) => {
-    startDrawing(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
+    const rect = canvas.getBoundingClientRect();
+    startDrawing(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
 });
 
 canvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
-    draw(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
+    const rect = canvas.getBoundingClientRect();
+    draw(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
 });
 
 canvas.addEventListener('touchend', stopDrawing);
