@@ -6,13 +6,21 @@ let lastX = 0;
 let lastY = 0;
 
 function applyShader() {
-    var model = document.getElementById('model');
-    model.setAttribute('shader', {
-        color: 'red',
-        texture: '#texture'
+    const textureSrc = document.getElementById('texture').src;
+    const modelEntity = document.getElementById('model');
+    const modelMesh = modelEntity.getObject3D('mesh');
+    const textureLoader = new THREE.TextureLoader();
+
+    textureLoader.load(textureSrc, (texture) => {
+        modelMesh.traverse((node) => {
+            if (node.isMesh) {
+                node.material.map = texture;
+                node.material.needsUpdate = true;
+            }
+        });
     });
-    console.log("presstexture");
 }
+
 
 
 AFRAME.registerShader('texture-overlay', {
@@ -129,3 +137,37 @@ document.getElementById('download-btn').addEventListener('click', () => {
     a.download = 'canvas.png';
     a.click();
 });
+
+function overlayImagesAndDownload() {
+    const largeImage = document.getElementById('large-image');
+    const overlayCanvas = document.createElement('canvas');
+    overlayCanvas.width = 1230;
+    overlayCanvas.height = 1230;
+    const overlayCtx = overlayCanvas.getContext('2d');
+
+    overlayCtx.drawImage(largeImage, 0, 0);
+    overlayCtx.drawImage(canvas, 465, 914, 300, 300);
+
+    // Convert the overlay canvas to a data URL
+    const dataUrl = overlayCanvas.toDataURL('image/png');
+
+    // Create a download link
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = 'overlayedImage.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a); // Remove the download link from the document
+}
+
+// Call the overlayImagesAndDownload function
+overlayImagesAndDownload();
+
+
+// Call the applyTexture function
+applyTexture();
+
+
+// Call the overlayImagesAndDownload function
+overlayImagesAndDownload();
+

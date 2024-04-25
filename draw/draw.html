@@ -8,10 +8,13 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 </head>
 <body>
+    <img id="large-image" src="1230.png" width="1230" height="1230">
     <canvas id="canvas" width="300" height="300"></canvas>
     <button id="download-btn">Download</button>
     <button id="clear-btn">Clear</button>
-    <button onclick="applyShader()">texture</button>
+    <button onclick="applyShader()">Change Texture</button>
+    <button onclick="overlayImagesAndDownload()">Overlay Images and Download</button>
+
     <script src="script.js"></script>
     <div id="parametre">
         <a-scene embedded background="color: #F2E8C6">
