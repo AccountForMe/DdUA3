@@ -6,20 +6,23 @@ let lastX = 0;
 let lastY = 0;
 
 function applyShader() {
-    const textureSrc = document.getElementById('texture').src;
+    const textureSrc = localStorage.getItem('cachedImageUrl');
     const modelEntity = document.getElementById('model');
     const modelMesh = modelEntity.getObject3D('mesh');
     const textureLoader = new THREE.TextureLoader();
 
-    textureLoader.load(textureSrc, (texture) => {
-        modelMesh.traverse((node) => {
-            if (node.isMesh) {
-                node.material.map = texture;
-                node.material.needsUpdate = true;
-            }
+    if (textureSrc) {
+        textureLoader.load(textureSrc, (texture) => {
+            modelMesh.traverse((node) => {
+                if (node.isMesh) {
+                    node.material.map = texture;
+                    node.material.needsUpdate = true;
+                }
+            });
         });
-    });
+    }
 }
+
 
 
 
@@ -138,6 +141,8 @@ document.getElementById('download-btn').addEventListener('click', () => {
     a.click();
 });
 
+let cachedImageUrl = null;
+
 function overlayImagesAndDownload() {
     const largeImage = document.getElementById('large-image');
     const overlayCanvas = document.createElement('canvas');
@@ -151,23 +156,37 @@ function overlayImagesAndDownload() {
     // Convert the overlay canvas to a data URL
     const dataUrl = overlayCanvas.toDataURL('image/png');
 
-    // Create a download link
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = 'overlayedImage.png';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a); // Remove the download link from the document
+    // Store the data URL in a variable
+    cachedImageUrl = dataUrl;
+
+    // Optionally, you can also save the data URL to local storage for persistent caching
+    localStorage.setItem('cachedImageUrl', dataUrl);
+
+    applyShader();
 }
+
+// Example usage
+overlayImagesAndDownload();
+
+// Later, you can use the cached image URL
+if (cachedImageUrl) {
+    // Use the cached image URL
+    console.log('Cached image URL:', cachedImageUrl);
+} else {
+    // Handle case when image is not cached
+    console.log('Image is not cached');
+}
+
+
 
 // Call the overlayImagesAndDownload function
 overlayImagesAndDownload();
 
 
 // Call the applyTexture function
-applyTexture();
+// applyTexture();
 
+function back(){
+    window.location.href = '../index.html';
 
-// Call the overlayImagesAndDownload function
-overlayImagesAndDownload();
-
+}

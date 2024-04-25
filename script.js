@@ -38,8 +38,9 @@ function checkCombination() {
     }
 }
 
-function draw() {
+function drawpagenexr() {
     window.location.href = 'draw/draw.html';
+    console.log('presseddraw');
 }
 
 //////////////////////////////////////////////DRAW
