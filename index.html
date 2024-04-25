@@ -24,6 +24,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
             <button id="download-btn">Download</button>
             <button onclick="drawpagenexr()">draw</button>
+            <button onclick="overlayImagesAndDownload()">Overlay Images and Download</button>
             <button id="clear-btn">Clear</button>
             <div class="combination">
                 <button onclick="changeDigit(1, 0)">▲</button>
@@ -51,6 +52,7 @@
         <a-assets>
             <a-asset-item id="cube" src="cube.glb"></a-asset-item>
             <a-asset-item id="cake" src="5portal_cake.glb"></a-asset-item>
+            <img id="large-image" src="1230.png" width="1230" height="1230">
 
         </a-assets>
         <a-entity id="model" position='0 0 0' gltf-model="#cube" scale="1 1 1"></a-entity>

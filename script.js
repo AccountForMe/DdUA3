@@ -1,6 +1,8 @@
 var combination = [0, 0, 0]; // Initial combination
 var maxDigitValue = 9; // Maximum digit value
 
+
+
 function toggleMenu() {
     var menu = document.querySelector('.menu-container');
     var box = document.querySelector('.menu-button');
@@ -44,9 +46,29 @@ function drawpagenexr() {
 }
 
 //////////////////////////////////////////////DRAW
+
+function applyShader() {
+    const textureSrc = localStorage.getItem('cachedImageUrl');
+    const modelEntity = document.getElementById('model');
+    const modelMesh = modelEntity.getObject3D('mesh');
+    const textureLoader = new THREE.TextureLoader();
+
+    if (textureSrc) {
+        textureLoader.load(textureSrc, (texture) => {
+            modelMesh.traverse((node) => {
+                if (node.isMesh) {
+                    node.material.map = texture;
+                    node.material.needsUpdate = true;
+                }
+            });
+        });
+    }
+}
+
+
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
@@ -56,49 +78,52 @@ function clearCanvas() {
     drawDots(); // Redraw the dots after clearing
 }
 
+function startDrawing(x, y) {
+    isDrawing = true;
+    lastX = x;
+    lastY = y;
+}
+
+
 function draw(x, y) {
-    console.log('x:', x, 'y:', y); // Print the coordinates
+    if (!isDrawing) return;
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(x, y);
     ctx.strokeStyle = 'red';
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 20;
     ctx.stroke();
     lastX = x;
     lastY = y;
 }
 
+function stopDrawing() {
+    isDrawing = false;
+}
+
 canvas.addEventListener('mousedown', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY];
+    startDrawing(e.offsetX, e.offsetY);
 });
 
 canvas.addEventListener('mousemove', (e) => {
-    if (isDrawing) {
-        draw(e.offsetX, e.offsetY);
-    }
+    draw(e.offsetX, e.offsetY);
 });
 
-canvas.addEventListener('mouseup', () => {
-    isDrawing = false;
-});
+canvas.addEventListener('mouseup', stopDrawing);
 
 canvas.addEventListener('touchstart', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop];
+    const rect = canvas.getBoundingClientRect();
+    startDrawing(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
 });
 
 canvas.addEventListener('touchmove', (e) => {
-    if (isDrawing) {
-        e.preventDefault();
-        draw(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop);
-    }
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    draw(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
 });
 
-canvas.addEventListener('touchend', () => {
-    isDrawing = false;
-});
+canvas.addEventListener('touchend', stopDrawing);
 
 // Define the positions of the 7 dots
 const dots = [
@@ -138,18 +163,60 @@ document.getElementById('download-btn').addEventListener('click', () => {
     a.click();
 });
 
+let cachedImageUrl = null;
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Your code here
-    function changeTexture() {
-      var modelEntity = document.getElementById('model');
-      var materialComponent = modelEntity.querySelector('[material]');
-      if (materialComponent) {
-        materialComponent.setAttribute('material', 'src', 'texturerock.png');
-      } else {
-        console.error('Material component not found');
-      }
-    }
-  });
+function overlayImagesAndDownload() {
+    const largeImage = document.getElementById('large-image');
+    const overlayCanvas = document.createElement('canvas');
+    overlayCanvas.width = 1230;
+    overlayCanvas.height = 1230;
+    const overlayCtx = overlayCanvas.getContext('2d');
+
+    overlayCtx.drawImage(largeImage, 0, 0);
+    overlayCtx.drawImage(canvas, 465, 914, 300, 300);
+
+    // Convert the overlay canvas to a data URL
+    const dataUrl = overlayCanvas.toDataURL('image/png');
+
+    // Store the data URL in a variable
+    cachedImageUrl = dataUrl;
+
+    // Optionally, you can also save the data URL to local storage for persistent caching
+    localStorage.setItem('cachedImageUrl', dataUrl);
+
+    applyShader();
+}
+
+// Example usage
+overlayImagesAndDownload();
+
+// Later, you can use the cached image URL
+if (cachedImageUrl) {
+    // Use the cached image URL
+    console.log('Cached image URL:', cachedImageUrl);
+} else {
+    // Handle case when image is not cached
+    console.log('Image is not cached');
+}
+
+
+
+// Call the overlayImagesAndDownload function
+overlayImagesAndDownload();
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Your code here
+//     function changeTexture() {
+//       var modelEntity = document.getElementById('model');
+//       var materialComponent = modelEntity.querySelector('[material]');
+//       if (materialComponent) {
+//         materialComponent.setAttribute('material', 'src', 'texturerock.png');
+//       } else {
+//         console.error('Material component not found');
+//       }
+//     }
+//   });
   
   
