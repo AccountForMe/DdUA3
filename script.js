@@ -33,9 +33,17 @@ function changeDigit(change, digitIndex) {
 function checkCombination() {
     var targetCombination = [6, 8, 4]; // The target combination to match
     if (combination.join('') === targetCombination.join('')) {
-        if (selectedShape === true)
-        console.log('Combination is correct!'); // Debug print statement
+        if (selectedShape === true) {
+            console.log('Combination is correct!'); // Debug print statement
+            window.location.href = 'cake.html';
+        }
         
+        else{
+            alert('Pas bien');
+        }
+    }
+    else{
+        alert('Pas bien');
     }
 }
 
