@@ -17,15 +17,25 @@
     <button class="menu-button startanimation" onclick="toggleMenu()">Open Menu</button>
     <div class="menu-container closed">
         <div class="container">
-            <h1 id="message">Regarde sur le HIRO</h1>
-            
-            <button onclick="changeTexture()">texture</button>
+            <h1 id="message">Regarde sur le HIRO pour des indice</h1>
+            <h2 id="message2">Connecte les points.</h2>
+            <!-- <button onclick="changeTexture()">texture</button> -->
             <canvas id="canvas" width="300" height="300"></canvas>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
             <button id="download-btn">Download</button>
-            <button onclick="drawpagenexr()">draw</button>
-            <button onclick="overlayImagesAndDownload()">Overlay Images and Download</button>
-            <button id="clear-btn">Clear</button>
+            <div class="dropdown">
+                <button class="dropbtn">Select la forme</button>
+                <div class="dropdown-content">
+                  <b id="Xop" onclick="Xclick()">X</b>
+                  <b id="oop" onclick="oclick()">o</b>
+                  <b id="triop" onclick="triclick()">△</b>
+                  <b id="squaop" onclick="squaclick()">□</b>
+                </div>
+              </div>
+            <!-- <button onclick="drawpagenexr()">draw</button> -->
+            <button onload="overlayImagesAndDownload()" id="SendImage"  onclick="overlayImagesAndDownload()">Envoyer l'image sur le cube</button>
+            <button id="clear-btn">Nettoyer le tableau</button>
+            <h2 id="message2">Trouve le code.</h2>
             <div class="combination">
                 <button onclick="changeDigit(1, 0)">▲</button>
                 <button onclick="changeDigit(1, 1)">▲</button>
@@ -45,21 +55,25 @@
                 <button onclick="changeDigit(-1, 1)">▼</button>
                 <button onclick="changeDigit(-1, 2)">▼</button>
             </div>
-            <button onclick="checkCombination()">Submit</button>
+            <button id="submit" onclick="checkCombination()">Vérifier</button>
         </div>
     </div>
-    <a-scene arjs>
+    <a-scene arjs> 
+        
         <a-assets>
             <a-asset-item id="cube" src="cube.glb"></a-asset-item>
             <a-asset-item id="cake" src="5portal_cake.glb"></a-asset-item>
             <img id="large-image" src="1230.png" width="1230" height="1230">
 
         </a-assets>
+        
         <a-entity id="model" position='0 0 0' gltf-model="#cube" scale="1 1 1"></a-entity>
+        
         <!-- <a-entity class="cakeprtl" position='0 0 0' gltf-model="#cake" scale="1 1 1"></a-entity> -->
         <!-- <a-box position='0 0 0'></a-box> -->
         <a-marker-camera preset='hiro'></a-marker-camera>
     </a-scene>
     <script src="script.js"></script>
+    
 </body>
 </html>

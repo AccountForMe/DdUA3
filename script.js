@@ -1,6 +1,6 @@
 var combination = [0, 0, 0]; // Initial combination
 var maxDigitValue = 9; // Maximum digit value
-
+var selectedShape = false;
 
 
 function toggleMenu() {
@@ -33,10 +33,9 @@ function changeDigit(change, digitIndex) {
 function checkCombination() {
     var targetCombination = [6, 8, 4]; // The target combination to match
     if (combination.join('') === targetCombination.join('')) {
+        if (selectedShape === true)
         console.log('Combination is correct!'); // Debug print statement
-        var cake = document.querySelector('.cakeprtl');
-        cake.classList.add('visible'); // Add the 'visible' class to the cake entity
-        cake.classList.remove('cakeprtl'); // Add the 'visible' class to the cake entity
+        
     }
 }
 
@@ -92,7 +91,7 @@ function draw(x, y) {
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(x, y);
     ctx.strokeStyle = 'red';
-    ctx.lineWidth = 20;
+    ctx.lineWidth = 10;
     ctx.stroke();
     lastX = x;
     lastY = y;
@@ -127,13 +126,13 @@ canvas.addEventListener('touchend', stopDrawing);
 
 // Define the positions of the 7 dots
 const dots = [
-    { x: 30, y: 120 },
+    { x: 50, y: 120 },
     { x: 160, y: 120 },
     { x: 160, y: 50 },
-    { x: 280, y: 150 },
+    { x: 240, y: 150 },
     { x: 160, y: 250 },
     { x: 160, y: 180 },
-    { x: 30, y: 180 }
+    { x: 50, y: 180 }
 ];
 
 function drawDots() {
@@ -219,4 +218,20 @@ overlayImagesAndDownload();
 //     }
 //   });
   
-  
+  ////////////////////option/////////////
+
+  function Xclick(){
+    selectedShape = false;
+  }
+
+  function oclick(){
+    selectedShape = true;
+  }
+
+  function triclick(){
+    selectedShape = false;
+  }
+
+  function squaclick(){
+    selectedShape = false;
+  }

@@ -4,9 +4,83 @@ body {
 }
 
 #message {
-    padding-top: 30%; /* Adjust the padding as needed */
+    padding-top: 20%; /* Adjust the padding as needed */
     color: white;
 }
+#message2 {
+    
+    color: white;
+}
+
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content b {
+    
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 50px;
+  }
+
+  #Xop {
+    color: blue;
+    
+  }
+
+  #oop {
+    color: red;
+  }
+
+  #triop {
+    color: green;
+  }
+
+  #squaop {
+    color: pink;
+  }
+  
+  .dropdown-content b:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+#submit {
+    width: 70%;
+    height: 50%;
+    align-items: center;
+    font-size: 40px;
+}
+
+#SendImage {
+    font-size: 20px;
+}
+
+#clear-btn {
+    font-size: 20px;
+}
+
+
 
 .menu-container {
     position: fixed;
